@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            position: relative;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .payment-form input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .payment-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .payment-form button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .success-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .success-message {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .checkmark {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #4CAF50;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            animation: checkmarkAnimation 1s ease;
+        }
+
+        .checkmark::before {
+            content: '';
+            position: absolute;
+            left: 13px;
+            top: 20px;
+            width: 10px;
+            height: 20px;
+            border: solid #4CAF50;
+            border-width: 0 4px 4px 0;
+            transform: rotate(45deg);
+        }
+
+        .success-message h2 {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #4CAF50;
+        }
+
+        @keyframes checkmarkAnimation {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Payment Page</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Complete Your Payment</h2>
+            <form class="payment-form">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+
+                <label for="card-name">Cardholder Name:</label>
+                <input type="text" id="card-name" name="card-name" placeholder="John Doe" required>
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+                <button type="button" onclick="paydone()">Pay Now</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-message">
+            <div class="checkmark"></div>
+            <h2>Payment Successful!</h2>
+        </div>
+    </div>
+
+    <script>
+        function paydone() {
+            const overlay = document.getElementById('success-overlay');
+            overlay.classList.add('show');
+            setTimeout(function() {
+                overlay.classList.remove('show');
+            }, 3000); // Hide overlay after 3 seconds
+        }
+    </script>
+</body>
+</html>
